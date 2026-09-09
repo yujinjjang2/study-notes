@@ -97,7 +97,9 @@
 
 먼저 `SCC_DTDB.Nextval`을 `nDelBakSn`으로 확보한다. 이후 원청 현장·해지 협력사에 속하면서 사용자 연결이 존재하는 행만 `jdx` 루프로 조회한다.
 
-```sql
+원본 삭제 프로시저의 조건절 발췌다. 독립 실행 가능한 SQL 예시가 아니므로 원문 형태를 유지한다.
+
+```text
 And a.CONN_COMPANY_ID Is Not Null
 And a.CONN_USER_NO Is Not Null
 And a.COMPANY_ID = #{COMPANY_ID}
@@ -117,7 +119,9 @@ And a.COOP_COMPANY_ID = idx.LINK_COMPANY_ID
 
 ### `WK_ID` 복원 로직의 의미 (3671~3693)
 
-```sql
+삭제 후 복원 분기를 설명하는 원본 절차 코드 발췌다. 독립 실행 가능한 SQL 예시가 아니므로 원문 형태를 유지한다.
+
+```text
 Select
     Count(*)
 Into

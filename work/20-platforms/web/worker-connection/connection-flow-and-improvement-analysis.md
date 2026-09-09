@@ -138,14 +138,14 @@ CONN_USER_NO    = USER_NO
 
 ```sql
 Select
-    a.WK_NO
+    a.WK_NO WK_NO  -- 근로자번호
 Into
     nConnWkNo
 From
     TWTLB_PWK_COOP a
 Where 1 = 1
-And a.CONN_COMPANY_ID = :COMPANY_ID
-And a.CONN_USER_NO = :USER_NO
+And a.CONN_COMPANY_ID = #{COMPANY_ID}
+And a.CONN_USER_NO = #{USER_NO}
 Group By
     a.WK_NO;
 ```

@@ -47,7 +47,7 @@ And CONN_USER_NO != #{USER_NO};
 
 ```sql
 Select
-    Decode(Count(*), 0, 'F', 'T') OTHER_USER_CONN_TF
+    Decode(Count(*), 0, 'F', 'T') OTHER_USER_CONN_TF  -- 다른사용자연결여부
 From
     TWTLB_PWK_COOP x
 Where 1 = 1

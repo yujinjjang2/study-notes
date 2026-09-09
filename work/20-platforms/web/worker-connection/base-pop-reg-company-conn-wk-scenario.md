@@ -110,14 +110,14 @@ CONN_USER_NO    = USER_NO
 Update TWTLB_PWK_COOP
 Set
     MODUTYCD = 'U',
-    MODUSERNO = :SESSION_USER_NO,
+    MODUSERNO = #{SESSION_USER_NO},
     MODDATE = Sysdate,
     CONN_COMPANY_ID = Null,
     CONN_USER_NO = Null
 Where 1 = 1
 And CONN_USER_NO Is Not Null
 And WK_NO = nWkNo
-And CONN_USER_NO != :USER_NO;
+And CONN_USER_NO != #{USER_NO};
 ```
 
 이 조건은 같은 근로자에 연결된 다른 사용자만 해제하고 현재 `USER_NO`는 유지한다. 회사 ID 조건이 없으므로, 다른 협력사 소속 행의 다른 사용자도 해제할 수 있다. 실제 반영 전에는 “근로자 1명당 사용자 연결을 전 협력사에 걸쳐 하나만 허용하는가”를 업무 규칙으로 확정해야 한다.

@@ -38,7 +38,7 @@ mWdlWk.put("encMobileNo", (rawMobileNo == null || rawMobileNo.isEmpty()) ? null
 
 두 SQL Mapper의 신규 등록·수정 SQL 모두 `TWTLB_WK.MOBILE_NO`에 `#{encMobileNo}`를 직접 대입한다.
 
-```sql
+```text
 -- INSERT
 MOBILE_NO, ...
 #{encMobileNo}, ...
@@ -72,16 +72,19 @@ MOBILE_NO = #{encMobileNo}
 ## 기존 데이터 확인 SQL
 
 ```sql
-SELECT WK_NO,
-       WK_NM,
-       WK_ID,
-       CRTDATE,
-       MODDATE,
-       CRTUSERNO,
-       MODUSERNO
-FROM TWTLB_WK
-WHERE MOBILE_NO IS NULL
-   OR TRIM(MOBILE_NO) IS NULL;
+Select
+    a.WK_NO WK_NO,  -- 근로자번호
+    a.WK_NM WK_NM,  -- 근로자명
+    a.WK_ID WK_ID,  -- 근로자ID
+    a.CRTDATE CRT_DATE,  -- 등록일시
+    a.MODDATE MOD_DATE,  -- 수정일시
+    a.CRTUSERNO CRT_USER_NO,  -- 등록사용자번호
+    a.MODUSERNO MOD_USER_NO  -- 수정사용자번호
+From
+    TWTLB_WK a
+Where 1 = 1
+And a.MOBILE_NO Is Null
+Or Trim(a.MOBILE_NO) Is Null;
 ```
 
 운영 DB에서 Oracle의 빈 문자열은 `NULL`로 취급된다. 암호화 저장 컬럼인 점을 고려하면, 공백 문자열은 암호문으로 저장될 수 있으므로 필요 시 복호화 기준의 추가 점검도 수행한다.

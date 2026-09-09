@@ -46,7 +46,7 @@
 
 ```sql
 Select
-    Count(*)
+    Count(*) CONN_WK_CNT  -- 연결근로자수
 Into
     nConnWkCnt
 From
@@ -58,7 +58,9 @@ And a.CONN_USER_NO = #{USER_NO};
 
 이후 현재 화면에서 선택한 현장과 근로자(`COMPANY_ID`, `PROJ_CODE`, `WK_CONN_NO`)의 연결 컬럼만 NULL 처리한다.
 
-```sql
+다음은 복원 분기를 설명하는 원본 절차 코드 발췌다. 독립 실행 가능한 SQL 예시가 아니므로 원문 형태를 유지한다.
+
+```text
 Update TWTLB_PWK_COOP
 Set
     CONN_COMPANY_ID = Null,
@@ -72,7 +74,9 @@ And COOP_COMPANY_ID = #{COMPANY_ID};
 
 `nConnWkCnt = 1`일 때만 해당 근로자의 ID를 복원한다.
 
-```sql
+다음은 복원 분기를 설명하는 원본 절차 코드 발췌다. 독립 실행 가능한 SQL 예시가 아니므로 원문 형태를 유지한다.
+
+```text
 If nConnWkCnt = 1 Then
     Update TWTLB_WK
     Set
@@ -94,7 +98,7 @@ End If;
 
 ```sql
 Select
-    Count(*)
+    Count(*) CONN_WK_CNT  -- 연결근로자수
 Into
     nWkConnCnt
 From
@@ -127,16 +131,16 @@ And a.CONN_USER_NO = #{USER_NO};
 
 ```sql
 Select
-    p.COMPANY_ID,
-    p.PROJ_CODE,
-    p.COOP_COMPANY_ID,
-    p.WK_NO,
-    w.WK_ID,
-    w.WK_NM,
-    e.USER_ID,
-    e.USER_NM,
-    p.CONN_COMPANY_ID,
-    p.CONN_USER_NO
+    p.COMPANY_ID COMPANY_ID,  -- 회사ID
+    p.PROJ_CODE PROJ_CODE,  -- 현장코드
+    p.COOP_COMPANY_ID COOP_COMPANY_ID,  -- 협력회사ID
+    p.WK_NO WK_NO,  -- 근로자번호
+    w.WK_ID WK_ID,  -- 근로자ID
+    w.WK_NM WK_NM,  -- 근로자명
+    e.USER_ID USER_ID,  -- 사용자ID
+    e.USER_NM USER_NM,  -- 사용자명
+    p.CONN_COMPANY_ID CONN_COMPANY_ID,  -- 연결회사ID
+    p.CONN_USER_NO CONN_USER_NO  -- 연결사용자번호
 From
     TWTLB_PWK_COOP p,
     TWTLB_WK w,
@@ -145,8 +149,8 @@ Where 1 = 1
 And p.WK_NO = w.WK_NO
 And p.CONN_COMPANY_ID = e.COMPANY_ID
 And p.CONN_USER_NO = e.USER_NO
-And p.CONN_COMPANY_ID = :CONN_COMPANY_ID
-And p.CONN_USER_NO = :CONN_USER_NO
+And p.CONN_COMPANY_ID = #{CONN_COMPANY_ID}
+And p.CONN_USER_NO = #{CONN_USER_NO}
 Order By
     p.WK_NO,
     p.COMPANY_ID,

@@ -55,30 +55,34 @@
 
 ```sql
 Select
-    w.WK_NO,
-    w.WK_ID,
-    e.USER_ID,
-    e.USE_TAG,
-    d.DTDB_DTTM,
-    d.COMPANY_ID,
-    d.PROJ_CODE,
-    d.COOP_COMPANY_ID,
-    d.CONN_USER_NO
+    w.WK_NO WK_NO,  -- 근로자번호
+    w.WK_ID WK_ID,  -- 근로자ID
+    e.USER_ID USER_ID,  -- 사용자ID
+    e.USE_TAG USE_TAG,  -- 사용여부
+    d.DTDB_DTTM DTDB_DTTM,  -- 삭제일시
+    d.COMPANY_ID COMPANY_ID,  -- 회사ID
+    d.PROJ_CODE PROJ_CODE,  -- 현장코드
+    d.COOP_COMPANY_ID COOP_COMPANY_ID,  -- 협력회사ID
+    d.CONN_USER_NO CONN_USER_NO  -- 연결사용자번호
 From
     TWTLB_WK w,
     DTDB_TWTLB_PWK_COOP_CONN d,
     TCC_EMPLOYE e
-Where w.WK_NO = d.WK_NO
+Where 1 = 1
+And w.WK_NO = d.WK_NO
 And e.USER_ID(+) = w.WK_ID
 And w.USE_TF = 'T'
 And w.WK_ID != 'WK-' || w.WK_NO
 And Not Exists (
-    Select 1
-    From TWTLB_PWK_COOP x
-    Where x.WK_NO = w.WK_NO
+    Select 1 EXISTS_TF  -- 연결존재여부
+    From
+        TWTLB_PWK_COOP x
+    Where 1 = 1
+    And x.WK_NO = w.WK_NO
     And x.CONN_USER_NO Is Not Null
 )
-Order By d.DTDB_DTTM Desc;
+Order By
+    d.DTDB_DTTM Desc;
 ```
 
 결과 해석:
@@ -105,7 +109,9 @@ Order By d.DTDB_DTTM Desc;
 
 아래는 삽입할 로직의 예시다. 실제 반영 시 기존 들여쓰기와 감사 컬럼 규칙을 따른다.
 
-```sql
+다음은 삭제 후 복원 분기를 설명하기 위한 원본 절차 코드 발췌다. 실행용 SQL 예시가 아니므로 원문 형태를 유지한다.
+
+```text
 -- Declare 영역
 nWkConnCnt Number;
 
