@@ -29,6 +29,7 @@ study-notes/
 │   │   ├── api/                # API 공통 규칙과 호출 흐름
 │   │   └── report/             # 리포트 관련 분석
 │   ├── 30-external-services/   # 외부 API, 인증, 웹훅 연동
+│   ├── 40-client-maintenance/  # 고객사 운영 문의·장애·설정 유지보수
 │   └── 90-archive/             # 종료·이관된 참고 문서
 ├── learning/                   # 개인 학습 노트
 ├── conversations/              # Codex 대화에서 정리한 기록

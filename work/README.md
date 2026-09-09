@@ -23,6 +23,10 @@ work/
 │   ├── external-api/
 │   ├── authentication/
 │   └── webhook/
+├── 40-client-maintenance/     # 고객사 운영 유지보수
+│   ├── organization-registration/ # 조직·회사 등록 및 연결
+│   ├── incidents/             # 고객사 운영 장애
+│   └── operations/            # 운영 절차와 데이터 설정
 └── 90-archive/                # 종료·이관된 참고 문서
 ```
 
@@ -33,6 +37,7 @@ work/
 - **업무 기능이 중심인 문서**는 `10-features/`에 둔다. 하나의 기능에서 WEB·모바일·API가 함께 동작하면 문서를 플랫폼별로 나누지 않는다.
 - **플랫폼 공통 주제**(화면 구성, 모바일 권한·딥링크, API 규약·오류 형식, 리포트 출력)는 `20-platforms/`에 둔다.
 - **외부 제공자와의 계약·인증·요청/응답·장애 대응**은 `30-external-services/`에 둔다. 제공자별 문서는 `external-api/<provider>/`로 나눈다.
+- **고객사 운영 문의·장애·설정 요청**은 `40-client-maintenance/`에 둔다. 고객사별 폴더 대신 업무 주제별로 분류하고, 고객·담당자·계정·운영 식별값은 일반화한다.
 - 문서가 여러 영역에 걸치면 한 곳만 원본으로 정하고, 다른 위치의 README에서 링크한다. 같은 내용을 복사하지 않는다.
 - 파일명은 영문 kebab-case로 주제를 먼저 쓴다. 예: `mobile-deep-link-routing.md`, `external-api-provider-authentication.md`.
 - 날짜·상태·관련 플랫폼은 문서 상단 메타정보에 기록한다.
