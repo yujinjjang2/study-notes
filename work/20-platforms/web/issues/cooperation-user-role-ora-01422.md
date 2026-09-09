@@ -14,7 +14,7 @@
 
 ```sql
 Select
-    a.WK_NO WK_NO  -- 근로자번호
+    a.WK_NO  -- 근로자번호
 Into
     nConnWkNo
 From
@@ -60,12 +60,12 @@ And WK_NO = 40103
 
 ```sql
 Select
-    a.PROJ_CODE PROJ_CODE,  -- 현장코드
-    a.WK_NO WK_NO,  -- 근로자번호
-    b.WK_NM WK_NM,  -- 근로자명
-    b.WK_ID WK_ID,  -- 근로자ID
-    a.CONN_COMPANY_ID CONN_COMPANY_ID,  -- 연결회사ID
-    a.CONN_USER_NO CONN_USER_NO  -- 연결사용자번호
+    a.PROJ_CODE,  -- 현장코드
+    a.WK_NO,  -- 근로자번호
+    b.WK_NM,  -- 근로자명
+    b.WK_ID,  -- 근로자ID
+    a.CONN_COMPANY_ID,  -- 연결회사ID
+    a.CONN_USER_NO  -- 연결사용자번호
 From
     TWTLB_PWK_COOP a,
     TWTLB_WK b

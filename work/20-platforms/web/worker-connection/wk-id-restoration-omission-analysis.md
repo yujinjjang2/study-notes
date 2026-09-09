@@ -55,15 +55,15 @@
 
 ```sql
 Select
-    w.WK_NO WK_NO,  -- 근로자번호
-    w.WK_ID WK_ID,  -- 근로자ID
-    e.USER_ID USER_ID,  -- 사용자ID
-    e.USE_TAG USE_TAG,  -- 사용여부
-    d.DTDB_DTTM DTDB_DTTM,  -- 삭제일시
-    d.COMPANY_ID COMPANY_ID,  -- 회사ID
-    d.PROJ_CODE PROJ_CODE,  -- 현장코드
-    d.COOP_COMPANY_ID COOP_COMPANY_ID,  -- 협력회사ID
-    d.CONN_USER_NO CONN_USER_NO  -- 연결사용자번호
+    w.WK_NO,  -- 근로자번호
+    w.WK_ID,  -- 근로자ID
+    e.USER_ID,  -- 사용자ID
+    e.USE_TAG,  -- 사용여부
+    d.DTDB_DTTM,  -- 삭제일시
+    d.COMPANY_ID,  -- 회사ID
+    d.PROJ_CODE,  -- 현장코드
+    d.COOP_COMPANY_ID,  -- 협력회사ID
+    d.CONN_USER_NO  -- 연결사용자번호
 From
     TWTLB_WK w,
     DTDB_TWTLB_PWK_COOP_CONN d,

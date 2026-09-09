@@ -138,7 +138,7 @@ CONN_USER_NO    = USER_NO
 
 ```sql
 Select
-    a.WK_NO WK_NO  -- 근로자번호
+    a.WK_NO  -- 근로자번호
 Into
     nConnWkNo
 From

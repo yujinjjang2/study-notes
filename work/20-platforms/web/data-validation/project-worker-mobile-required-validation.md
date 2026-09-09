@@ -73,13 +73,13 @@ MOBILE_NO = #{encMobileNo}
 
 ```sql
 Select
-    a.WK_NO WK_NO,  -- 근로자번호
-    a.WK_NM WK_NM,  -- 근로자명
-    a.WK_ID WK_ID,  -- 근로자ID
-    a.CRTDATE CRT_DATE,  -- 등록일시
-    a.MODDATE MOD_DATE,  -- 수정일시
-    a.CRTUSERNO CRT_USER_NO,  -- 등록사용자번호
-    a.MODUSERNO MOD_USER_NO  -- 수정사용자번호
+    a.WK_NO,  -- 근로자번호
+    a.WK_NM,  -- 근로자명
+    a.WK_ID,  -- 근로자ID
+    a.CRTDATE,  -- 등록일시
+    a.MODDATE,  -- 수정일시
+    a.CRTUSERNO,  -- 등록사용자번호
+    a.MODUSERNO  -- 수정사용자번호
 From
     TWTLB_WK a
 Where 1 = 1

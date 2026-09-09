@@ -131,16 +131,16 @@ And a.CONN_USER_NO = #{USER_NO};
 
 ```sql
 Select
-    p.COMPANY_ID COMPANY_ID,  -- 회사ID
-    p.PROJ_CODE PROJ_CODE,  -- 현장코드
-    p.COOP_COMPANY_ID COOP_COMPANY_ID,  -- 협력회사ID
-    p.WK_NO WK_NO,  -- 근로자번호
-    w.WK_ID WK_ID,  -- 근로자ID
-    w.WK_NM WK_NM,  -- 근로자명
-    e.USER_ID USER_ID,  -- 사용자ID
-    e.USER_NM USER_NM,  -- 사용자명
-    p.CONN_COMPANY_ID CONN_COMPANY_ID,  -- 연결회사ID
-    p.CONN_USER_NO CONN_USER_NO  -- 연결사용자번호
+    p.COMPANY_ID,  -- 회사ID
+    p.PROJ_CODE,  -- 현장코드
+    p.COOP_COMPANY_ID,  -- 협력회사ID
+    p.WK_NO,  -- 근로자번호
+    w.WK_ID,  -- 근로자ID
+    w.WK_NM,  -- 근로자명
+    e.USER_ID,  -- 사용자ID
+    e.USER_NM,  -- 사용자명
+    p.CONN_COMPANY_ID,  -- 연결회사ID
+    p.CONN_USER_NO  -- 연결사용자번호
 From
     TWTLB_PWK_COOP p,
     TWTLB_WK w,
