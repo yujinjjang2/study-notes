@@ -73,6 +73,65 @@ scwin.getActRate = function(aoDataList, asNumeratorColId, asDenominatorColId) {
 };
 ```
 
+## 조회 결과 유무에 따른 함수 실행
+
+### 1. 조회 결과가 없을 때
+
+처음 화면을 열었거나 조회 조건에 해당하는 데이터가 없으면 DataList의 행 수는 0이다.
+
+```javascript
+aoDataList.getTotalRow(); // 0
+```
+
+반복문의 첫 조건은 `0 < 0`이므로 거짓이다. 따라서 반복문 안의 두 누적 코드는 한 번도 실행되지 않는다.
+
+```javascript
+for(let i = 0; i < aoDataList.getTotalRow(); i++) {
+	// 실행되지 않음
+}
+```
+
+함수 시작 시 설정한 값이 그대로 유지된다.
+
+```javascript
+let nNumerator = 0;
+let nDenominator = 0;
+```
+
+이후 분모가 0인지 검사하는 조건이 참이므로, 함수는 `0`을 반환한다. Footer의 `displayFormat="###%"`에 의해 화면에는 `0%`가 표시된다.
+
+```javascript
+if(nDenominator === 0) {
+	return 0;
+}
+```
+
+이 상황에서는 `Number(...) || 0` 줄 자체가 실행되지 않는다. 처음 조회 전 0% 처리는 `nDenominator`의 초기값과 `return 0` 분기로 이루어진다.
+
+### 2. 조회 결과가 있을 때
+
+행이 하나 이상이면 반복문이 각 행의 분자·분모 건수를 차례로 더한다.
+
+```javascript
+nNumerator += Number(aoDataList.getCellData(i, asNumeratorColId)) || 0;
+nDenominator += Number(aoDataList.getCellData(i, asDenominatorColId)) || 0;
+```
+
+`A || B`는 `A`가 정상적으로 사용할 수 있는 값이면 `A`를 쓰고, 그렇지 않으면 `B`를 쓰는 표현이다. 여기서는 셀 값을 숫자로 바꾼 결과가 이상하면 그 행을 0건으로 계산한다.
+
+| 셀 값 | `Number(셀 값)` 결과 | 실제 누적값 |
+| --- | --- | --- |
+| `"3"` | `3` | `3` |
+| `"0"` | `0` | `0` |
+| `undefined` | `NaN` | `0` |
+| `"문자"` | `NaN` | `0` |
+
+`NaN`은 “숫자로 계산할 수 없음”이라는 뜻이다. `|| 0`이 `NaN`을 숫자로 변환하는 것은 아니다. `NaN`을 그대로 더하면 전체 합계도 `NaN`이 되므로, 그 대신 0을 선택해 합계 계산을 계속할 수 있게 한다.
+
+```javascript
+10 + NaN; // NaN
+```
+
 ### 탭별 래퍼 함수
 
 ```javascript
